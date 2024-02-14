@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro"/>
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435_changed.gazebo.xacro"/>
+
+  <!-- Set the reference link to the base link -->
+  <xacro:property name="reference_link" value="base_link"/>
+
+</robot>

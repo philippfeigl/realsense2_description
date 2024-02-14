@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot name="realsense2_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435_with_map_link.urdf.xacro" />
+
+  <xacro:macro name="camera_sensor" params="name:=camera topics_ns:=camera parent child *origin publish_pointcloud:=true">
+    <joint name="${parent}_to_base_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}" />
+      <child link="${child}" />
+    </joint>
+    <link name="${child}" />
+    <xacro:sensor_d435 name="${name}" topics_ns="${name}" parent="${child}" publish_pointcloud="${publish_pointcloud}">
+      <xacro:insert_block name="origin" />
+    </xacro:sensor_d435>
+  </xacro:macro>
+
+  <link name="map" />
+  <xacro:camera_sensor name="camera" topics_ns="camera" parent="map" child="base_link" publish_pointcloud="true">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:camera_sensor>
+
+</robot>
